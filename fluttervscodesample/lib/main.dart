@@ -41,9 +41,17 @@ class HomePage extends StatelessWidget {
                 child: Text("S"),
               ),
             ),
-            Row(children: <Widget>[
-              CircleAvatar(child: Text("S"),)
-            ],)
+            ListTile(
+              title: Text("Option 1"),
+              subtitle: Text("This is option 1"),
+              leading: CircleAvatar(
+                child: Text("S"),
+              ),
+              trailing: IconButton(
+                icon: Icon(Icons.delete, color: Colors.red),
+                onPressed: () {},
+              ),
+            )
           ],
         ),
       ),
