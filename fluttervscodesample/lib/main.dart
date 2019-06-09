@@ -6,6 +6,20 @@ void main() {
     theme: ThemeData(
       primarySwatch: Colors.red,
     ),
-    home: Text("Welcome to Flutter with VS Code"),
+    home: Scaffold(
+      appBar: AppBar(
+        title: Text("First flutter App using vs code."),
+      ),
+      body: Text("Welcome to my flutter first app"),
+    ),
   ));
+}
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      
+    );
+  }
 }
