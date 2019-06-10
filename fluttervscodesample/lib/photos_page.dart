@@ -23,13 +23,17 @@ class _PhotosPageState extends State<PhotosPage> {
       ),
       body: photosList == null
           ? Center(child: CircularProgressIndicator())
-          : Container(),
+          : Container(
+              child: Text(photosList.toString()),
+            ),
     );
   }
 
   void fetchData() async {
     var url = "https://picsum.photos/list";
     var res = await http.get(url);
-    var decodeJson  = jsonDecode(res.body);
+    var decodeJson = jsonDecode(res.body);
+    photosList = decodeJson;
+    setState(() {});
   }
 }
