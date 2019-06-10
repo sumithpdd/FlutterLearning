@@ -8,7 +8,7 @@ class PhotosPage extends StatefulWidget {
 }
 
 class _PhotosPageState extends State<PhotosPage> {
-  var photosList;
+  List photosList;
   @override
   void initState() {
     super.initState();
@@ -23,8 +23,15 @@ class _PhotosPageState extends State<PhotosPage> {
       ),
       body: photosList == null
           ? Center(child: CircularProgressIndicator())
-          : Container(
-              child: Text(photosList.toString()),
+          : ListView.builder(
+              itemCount: photosList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  title: Text(photosList[index]["filename"]),
+                  subtitle: Text(photosList[index]["author"]),
+                  trailing: Text(photosList[index]["format"]),
+                );
+              },
             ),
     );
   }
