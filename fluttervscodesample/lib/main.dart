@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttervscodesample/photos_page.dart';
 
 void main() {
   runApp(
@@ -7,7 +8,7 @@ void main() {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: HomePage(),
+      home: PhotosPage(),
     ),
   );
 }
