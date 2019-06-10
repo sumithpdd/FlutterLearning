@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:fluttervscodesample/photos_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -18,25 +21,33 @@ class _PhotosPageState extends State<PhotosPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Photos Page"),
-      ),
-      body: photosList == null
-          ? Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              itemCount: photosList.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  title: Text(photosList[index]["filename"]),
-                  subtitle: Text(photosList[index]["author"]),
-                  trailing: Text(photosList[index]["format"]),
-                );
-              },
-            ),
-    );
+        appBar: AppBar(
+          title: Text("Photos Page"),
+        ),
+        body: photosList == null
+            ? Center(child: CircularProgressIndicator())
+            : RefreshIndicator(
+                onRefresh: fetchData,
+                child: ListView.builder(
+                  itemCount: photosList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Card(
+                      elevation: 0,
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          child: Text(photosList[index]["id"].toString()),
+                        ),
+                        title: Text(photosList[index]["filename"]),
+                        subtitle: Text(photosList[index]["author"]),
+                        trailing: Text(photosList[index]["format"]),
+                      ),
+                    );
+                  },
+                ),
+              ));
   }
 
-  void fetchData() async {
+  Future<void> fetchData() async {
     var url = "https://picsum.photos/list";
     var res = await http.get(url);
     var decodeJson = jsonDecode(res.body);
